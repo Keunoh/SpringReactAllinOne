@@ -13,6 +13,7 @@ public class HelloController {
     @PostMapping("/login")
     public TestDto testMessage(){
         log.info("login log check line");
+        log.info("just line for git testing");
         return new TestDto();
     }
 }
