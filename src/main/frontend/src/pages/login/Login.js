@@ -19,9 +19,10 @@ const Login = () => {
             memberPw: userPw
         }
 
-        memberLogin()
+        memberLogin(loginRequestDto)
         .then(response => {
-            console.log("login success")
+            console.log("login success");
+            console.log(response);
         })
         .catch(error => {
             console.log(error);
@@ -58,8 +59,6 @@ const Login = () => {
                 Submit
             </button> 
         </form>
-        <h1>created it?</h1>
-        <h1>I changed it but is it ok FOR GIT?</h1>
       </div>
     );
 }
