@@ -1,2 +1,26 @@
-server.port=8989
-spring.thymeleaf.prefix=file:///C:///personal-project//SpringReactAllinOne//target//classes//static/
+server:
+  port: 8989
+
+spring:
+  thymeleaf:
+    prefix: file:///C:///personal-project//SpringReactAllinOne//target//classes//static/
+
+  output:
+    ansi:
+      enabled: always
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/allinone?serverTimezone=Asia/Seoul
+    username: root
+    password: mariadb
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
