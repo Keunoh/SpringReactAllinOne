@@ -16,9 +16,10 @@ const request = async (options) => {
     return json;
 }
 
-export function memberLogin(){
+export function memberLogin(loginRequestDto){
     return request({
         url: API_BASE_URL + "/user/login",
-        method: 'POST'
+        method: 'POST',
+        body:  JSON.stringify(loginRequestDto)
     });
 }
