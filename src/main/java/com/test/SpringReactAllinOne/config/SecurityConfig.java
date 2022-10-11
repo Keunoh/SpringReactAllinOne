@@ -20,10 +20,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
+    /**
+     * 이 부분이 만약 Component로 주입되었을 때 오류가 발생하는지 알아보기로 한다.
+     * @return
+     */
     @Bean
     public JwtAuthenticationFilter JwtAuthenticationFilter(){
         return new JwtAuthenticationFilter();
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
