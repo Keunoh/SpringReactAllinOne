@@ -1,15 +1,15 @@
 package com.test.SpringReactAllinOne.dto;
 
-import com.test.SpringReactAllinOne.domain.Member;
+import com.test.SpringReactAllinOne.domain.User;
 import lombok.Getter;
 
 @Getter
 public class LoginResponseDto {
-    private String memberId;
-    private String memberPw;
+    private String userId;
+    private String userPw;
 
-    public LoginResponseDto(Member memberData){
-        this.memberId = memberData.getMemberId();
-        this.memberPw = memberData.getMemberPw();
+    public LoginResponseDto(User userData){
+        this.userId = userData.getUserId();
+        this.userPw = userData.getUserPw();
     }
 }
