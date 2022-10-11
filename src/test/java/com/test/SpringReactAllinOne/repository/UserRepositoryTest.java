@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @SpringBootTest
-public class userRepositoryTest {
+public class UserRepositoryTest {
 
     @Autowired
     UserRepository userRepository;

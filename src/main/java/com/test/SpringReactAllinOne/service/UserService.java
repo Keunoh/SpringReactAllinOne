@@ -1,26 +1,26 @@
 package com.test.SpringReactAllinOne.service;
 
-import com.test.SpringReactAllinOne.domain.Member;
+import com.test.SpringReactAllinOne.domain.User;
 import com.test.SpringReactAllinOne.dto.LoginRequestDto;
 import com.test.SpringReactAllinOne.dto.LoginResponseDto;
-import com.test.SpringReactAllinOne.repository.MemberRepository;
+import com.test.SpringReactAllinOne.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class MemberService {
+public class UserService {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
-    public LoginResponseDto getMemberIdAndPassword(LoginRequestDto loginRequestDto){
+    public LoginResponseDto getUserIdAndPassword(LoginRequestDto loginRequestDto){
 
-        String memberId = loginRequestDto.getMemberId();
-        String memberPw = loginRequestDto.getMemberPw();
+        String userId = loginRequestDto.getUserId();
+        String userPw = loginRequestDto.getUserPw();
 
-        Member memberData = memberRepository.findByMemberIdAndMemberPw(memberId, memberPw)
+        User userData = userRepository.findByUserIdAndUserPw(userId, userPw)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
 
-        return new LoginResponseDto(memberData);
+        return new LoginResponseDto(userData);
     }
 }
