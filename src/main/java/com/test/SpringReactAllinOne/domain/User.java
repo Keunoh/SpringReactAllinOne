@@ -8,24 +8,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Member {
+public class User {
     @Id
     @GeneratedValue
-    private Long memberPrimaryKey;
+    private Long userPrimaryKey;
 
-    @Column(name = "member_id", length = 12, nullable = false)
-    private String memberId;
+    @Column(name = "user_id", length = 12, nullable = false)
+    private String userId;
 
-    @Column(name = "member_pw", length = 12, nullable = false)
-    private String memberPw;
+    @Column(name = "user_pw", length = 12, nullable = false)
+    private String userPw;
+
+    private Set<Role> roles = new HashSet<>();
 
     @Builder
-    public Member(String memberId, String memberPw){
-        this.memberId = memberId;
-        this.memberPw = memberPw;
+    public User(String userId, String userPw){
+        this.userId = userId;
+        this.userPw = userPw;
     }
 }
