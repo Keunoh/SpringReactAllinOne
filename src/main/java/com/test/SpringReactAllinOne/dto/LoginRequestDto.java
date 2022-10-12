@@ -1,11 +1,13 @@
 package com.test.SpringReactAllinOne.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class LoginRequestDto {
-    private String userId;
-    private String userPw;
+    private String usernameOrEmail;
+    private String password;
 
     public LoginRequestDto(){}
 }
