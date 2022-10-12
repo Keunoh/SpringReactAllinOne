@@ -20,11 +20,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             //JWT = JSON Web Token
             String jwt = getJwtFromRequest(request);
+            log.info("토큰의 정보 : " + jwt);
 
             if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)){
                 Long userId = jwtTokenProvider.getUserIdFromJWT(jwt);
@@ -33,6 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                log.error("doFilter의 if을 모두 통과? : yes");
             }
         } catch (Exception e) {
             log.error("Could not set user authentication in security context, -{}", e);
@@ -47,6 +52,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7, bearerToken.length());
         }
-        return "This text doesn't contains bearerToken !";
+        return null;
     }
 }
