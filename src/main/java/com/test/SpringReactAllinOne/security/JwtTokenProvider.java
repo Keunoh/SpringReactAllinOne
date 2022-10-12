@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.Date;
 
 @Slf4j
@@ -30,7 +29,7 @@ public class JwtTokenProvider {
                 .setSubject(Long.toString(customUserDetails.getId()))
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.ES512, jwtSecret)
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
 
