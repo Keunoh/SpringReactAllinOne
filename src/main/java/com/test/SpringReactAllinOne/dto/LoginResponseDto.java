@@ -5,11 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class LoginResponseDto {
-    private String userId;
-    private String userPw;
+    private String username;
+    private String password;
 
     public LoginResponseDto(User userData){
-        this.userId = userData.getUserId();
-        this.userPw = userData.getUserPw();
+        this.username = userData.getUsername();
+        this.password = userData.getPassword();
     }
 }
