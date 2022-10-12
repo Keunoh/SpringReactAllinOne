@@ -3,10 +3,12 @@ package com.test.SpringReactAllinOne.security;
 import com.test.SpringReactAllinOne.domain.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class CustomUserDetails implements UserDetails {
@@ -27,11 +29,14 @@ public class CustomUserDetails implements UserDetails {
     }
 
         public static CustomUserDetails createCustomUserDetails(User user) {
-
+            List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> 
+                    new SimpleGrantedAuthority(role.getRoleName().name())
+            ).collect(Collectors.toList());
 
             return new CustomUserDetails(
-                    user.getUserId(),
-                    user.getUserPw(),
+                    user.getId(),
+                    user.getUsername(),
+                    user.getPassword(),
                     authorities
             );
     }
