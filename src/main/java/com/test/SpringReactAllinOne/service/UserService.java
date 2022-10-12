@@ -15,10 +15,10 @@ public class UserService {
 
     public LoginResponseDto getUserIdAndPassword(LoginRequestDto loginRequestDto){
 
-        String userId = loginRequestDto.getUserId();
-        String userPw = loginRequestDto.getUserPw();
+        String userId = loginRequestDto.getUsernameOrEmail();
+        String userPw = loginRequestDto.getPassword();
 
-        User userData = userRepository.findByUserIdAndUserPw(userId, userPw)
+        User userData = userRepository.findByUsernameOrEmail(userId, userPw)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
 
         return new LoginResponseDto(userData);
