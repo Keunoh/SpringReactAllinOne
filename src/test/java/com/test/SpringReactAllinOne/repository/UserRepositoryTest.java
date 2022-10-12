@@ -30,16 +30,16 @@ public class UserRepositoryTest {
         String userPw = "user";
 
         userRepository.save(User.builder()
-                .userId(userId)
-                .userPw(userPw)
+                .username(userId)
+                .password(userPw)
                 .build());
         //when
         List<User> userList = userRepository.findAll();
 
         //then
         User user = userList.get(0);
-        assertThat(user.getUserId()).isEqualTo(userId);
-        assertThat(user.getUserPw()).isEqualTo(userPw);
+        assertThat(user.getUsername()).isEqualTo(userId);
+        assertThat(user.getPassword()).isEqualTo(userPw);
     }
 
     @Test
@@ -49,16 +49,16 @@ public class UserRepositoryTest {
         String userPw = "user1";
 
         userRepository.save(User.builder()
-                .userId(userId)
-                .userPw(userPw)
+                .username(userId)
+                .password(userPw)
                 .build());
 
         //when
-        User user = userRepository.findByUserIdAndUserPw(userId, userPw)
+        User user = userRepository.findByUsernameOrEmail(userId, userId)
                 .orElseThrow(() -> new IllegalStateException("해당 회원이 없습니다."));
 
         //then
-        log.info("멤버의 아이디와 비밀번호 : " + user.getUserId() + ", " + user.getUserPw());
+        log.info("멤버의 아이디와 비밀번호 : " + user.getUsername() + ", " + user.getPassword());
 
     }
 }
