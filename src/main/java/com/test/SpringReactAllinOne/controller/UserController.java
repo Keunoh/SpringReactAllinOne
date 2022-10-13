@@ -31,26 +31,25 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
     private final JwtTokenProvider tokenProvider;
-    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @PostMapping("/login")
-    public RVO<LoginResponseDto> userLogin(@RequestBody LoginRequestDto loginRequestDto){
-        return RVO.<LoginResponseDto>builder()
-                .message("로그인 되었습니다.")
-                .checkCode("체크 코드 생성")
-                .data(userService.getUserIdAndPassword(loginRequestDto))
-                .build();
-    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDto loginRequestDto) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequestDto.getUsernameOrEmail(),
-                        loginRequestDto.getPassword()
-                )
-        );
+        Authentication authentication = null;
+
+        try {
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequestDto.getUsername(),
+                            loginRequestDto.getPassword()
+                    )
+            );
+            //authenticate메서드는
+            log.error("what is in authentication ? : " + authentication);
+        } catch (Exception e){
+            log.error("exception from controller - {}", e);
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -64,7 +63,7 @@ public class UserController {
 
         User user = new User(signUpRequestDto.getUsername(), password);
 
-        userRepository.save(user);
+        userService.simpleCreateUser(user);
 
         return ResponseEntity.ok("create success!");
 
