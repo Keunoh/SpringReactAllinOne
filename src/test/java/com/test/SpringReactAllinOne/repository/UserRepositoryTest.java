@@ -54,7 +54,7 @@ public class UserRepositoryTest {
                 .build());
 
         //when
-        User user = userRepository.findByUsernameOrEmail(userId, userId)
+        User user = userRepository.findByUsername(userId)
                 .orElseThrow(() -> new IllegalStateException("해당 회원이 없습니다."));
 
         //then
