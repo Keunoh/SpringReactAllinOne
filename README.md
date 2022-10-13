@@ -38,8 +38,8 @@ SecurityContextHolder.getContext().setAuthentication(나의 authentication);
 
 그리고 사용자에게 토큰을 발급해준다.
 
-* 봐야할 클래스들[SpringReactAllinOne Project] 
-SecurityConfig, UserController, 
-AuthenticationManager(스프링 자체), 
-UsernamePasswordAuthenticationToken(스프링 자체)
+* 봐야할 클래스들[SpringReactAllinOne Project]   
+SecurityConfig, UserController,   
+AuthenticationManager(스프링 자체),   
+UsernamePasswordAuthenticationToken(스프링 자체)  
 CustomUserDetails, CustomUserDetails, TokenPorvider
