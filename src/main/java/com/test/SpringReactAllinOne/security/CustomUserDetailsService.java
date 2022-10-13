@@ -21,12 +21,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     //목적은 어떻게하여 코드의 혼동을 피할 것 인가
 
     @Override
-    public UserDetails loadUserByUsername(String usernameOrEmail)
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with usernameOrEmail : " + usernameOrEmail));
+                        new UsernameNotFoundException("User not found with username : " + username));
         return CustomUserDetails.createCustomUserDetails(user);
     }
 
