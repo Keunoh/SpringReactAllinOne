@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -28,16 +30,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             //JWT = JSON Web Token
             String jwt = getJwtFromRequest(request);
-            log.info("토큰의 정보 : " + jwt);
 
+            //사용자가 로그인이 되었을 때 실행되는 if구간이고
+            //헤더가 포함되어야 실행이 되어야한다.
             if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)){
                 Long userId = jwtTokenProvider.getUserIdFromJWT(jwt);
                 UserDetails userDetails = customUserDetailsService.loadUserById(userId);
                 UsernamePasswordAuthenticationToken authenticationToken
-                        = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        = new UsernamePasswordAuthenticationToken(userDetails, "myCredentials", userDetails.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                log.error("doFilter의 if을 모두 통과? : yes");
             }
         } catch (Exception e) {
             log.error("Could not set user authentication in security context, -{}", e);
@@ -52,6 +54,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7, bearerToken.length());
         }
+        /**
+         * 이 리턴 부분을 null이 아닌 다른 문자열로 반환 했을 때
+         * 헤더의 Bearer를 읽을 수 없기 때문에 오류가 나는데
+         * null을 반환했을 때는 오류가 왜 안나는지 알아봐야 한다.
+         * 오류가나도 토큰이 생성되기는 한다.
+         */
         return null;
     }
 }
