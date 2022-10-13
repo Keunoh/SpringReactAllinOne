@@ -28,15 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
-    /**
-     * 이 부분이 만약 Component로 주입되었을 때 오류가 발생하는지 알아보기로 한다.
-     * @return
-     */
-    @Bean
-    public JwtAuthenticationFilter JwtAuthenticationFilter(){
-        return new JwtAuthenticationFilter();
-    }
-
+    /** JwtAuthenticationFilter클래스는 내가 만든 커스텀 필터이다.
+    * 즉, 내가 제어할 수 있다는 판단이고 그래서 @Component로 클래스를 빈에 저장했다.
+    * 그래서 Autowired를 불러와 configure 함수에 객체를 주입할 수 있었다.
+    */
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -67,10 +64,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated();
 
-        //Add out custom JWT security filter
-        http.addFilterBefore(JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        /**
+         * 내가 만든 jwt필터를 spring security주기에 설정
+         */
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
+    //AuthenticationManagerBuilder를 이용해서 Authencation detailsService를 재설정 해준다.
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService)
