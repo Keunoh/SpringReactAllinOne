@@ -1,6 +1,9 @@
 # SpringReactAllinOne
 React and Spring is all in spring container
 
+1. Spring Security에 관한 내용과 각각의 역할
+	관련 URL : https://mangkyu.tistory.com/76
+
 2. 순수 signin은 컨트롤러에서 (permitAll이므로 필터없음)
 
 유저의 Principal(아이디), 유저의 Credential(비밀번호)를 가지고 토큰을 생성한다.
