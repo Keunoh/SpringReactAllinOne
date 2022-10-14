@@ -1,25 +1,25 @@
 import { useState } from "react";
-import { memberLogin } from "utils/APIUtils";
+import { signin } from "utils/APIUtils";
 
 const Login = () => {
 
-    const [userId, setUserId] = useState('');
-    const [userPw, setUserPw] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
         //e.preventDefault() 적어주지 않으면
         //계속해서 새로고침이 된다.
         e.preventDefault();
         console.log("Click Submit Button");
-        console.log("user ID : " + userId);
-        console.log("user PW : " + userPw);
+        console.log("user ID : " + username);
+        console.log("user PW : " + password);
 
         let loginRequestDto = {
-            memberId: userId,
-            memberPw: userPw
+            username: username,
+            password: password
         }
 
-        memberLogin(loginRequestDto)
+        signin(loginRequestDto)
         .then(response => {
             console.log("login success");
             console.log(response);
@@ -39,20 +39,20 @@ const Login = () => {
             </label>
             <input 
                 type="text"
-                name="userId"
-                value={userId}
+                name="username"
+                value={username}
                 autoComplete="off"
-                onChange={(e) => setUserId(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
                 required
             />
-            <label htmlFor="userPw">
+            <label htmlFor="password">
                 Password :
             </label>
             <input 
                 type="password"
-                name="userPw"
-                value={userPw}
-                onChange={(e) => setUserPw(e.target.value)}
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
             />
             <button>
