@@ -9,6 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @Controller
 public class CustomErrorController implements ErrorController {
+    /**
+     * 에러 컨트롤러 사용해주려면 매핑을 permitall로 풀어주어야 할 것 같다.
+     */
 
     @RequestMapping("/errorTest")
     public String errorTest(){
