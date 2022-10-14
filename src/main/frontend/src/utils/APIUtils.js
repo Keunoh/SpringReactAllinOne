@@ -16,9 +16,9 @@ const request = async (options) => {
     return json;
 }
 
-export function memberLogin(loginRequestDto){
+export function signin(loginRequestDto){
     return request({
-        url: API_BASE_URL + "/user/login",
+        url: API_BASE_URL + "/user/signin",
         method: 'POST',
         body:  JSON.stringify(loginRequestDto)
     });
