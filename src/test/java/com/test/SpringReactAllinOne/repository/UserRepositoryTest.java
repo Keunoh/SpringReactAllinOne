@@ -6,6 +6,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +19,10 @@ import java.util.List;
 public class UserRepositoryTest {
 
     @Autowired
-    UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @AfterEach
     public void afterEach(){
@@ -26,31 +32,35 @@ public class UserRepositoryTest {
     @Test
     public void 회원저장하기(){
         //given
-        String userId = "user";
-        String userPw = "user";
+        String userId = "user2";
+        String userPw = "user2";
+        String encodedUserPw = passwordEncoder.encode(userPw);
+
+        log.info("인코딩 된 패스워드 : " + encodedUserPw);
 
         userRepository.save(User.builder()
                 .username(userId)
-                .password(userPw)
+                .password(encodedUserPw)
                 .build());
         //when
-        List<User> userList = userRepository.findAll();
+        User user = userRepository.findByUsername(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("해당 회원이 없습니다."));
 
         //then
-        User user = userList.get(0);
         assertThat(user.getUsername()).isEqualTo(userId);
-        assertThat(user.getPassword()).isEqualTo(userPw);
+        assertThat(user.getPassword()).isEqualTo(encodedUserPw);
     }
 
     @Test
     public void 회원찾기(){
         //given
-        String userId = "user1";
-        String userPw = "user1";
+        String userId = "user3";
+        String userPw = "user3";
+        String encodedUserPw = passwordEncoder.encode(userPw);
 
         userRepository.save(User.builder()
                 .username(userId)
-                .password(userPw)
+                .password(encodedUserPw)
                 .build());
 
         //when
@@ -59,6 +69,8 @@ public class UserRepositoryTest {
 
         //then
         log.info("멤버의 아이디와 비밀번호 : " + user.getUsername() + ", " + user.getPassword());
+        assertThat(user.getUsername()).isEqualTo(userId);
+        assertThat(user.getPassword()).isEqualTo(encodedUserPw);
 
     }
 }
