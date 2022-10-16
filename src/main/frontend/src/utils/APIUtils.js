@@ -18,8 +18,16 @@ const request = async (options) => {
 
 export function signin(loginRequestDto){
     return request({
-        url: API_BASE_URL + "/user/signin",
-        method: 'POST',
-        body:  JSON.stringify(loginRequestDto)
+      url: API_BASE_URL + "/user/signin",
+      method: 'POST',
+      body:  JSON.stringify(loginRequestDto)
     });
+}
+
+export function signup(signUpRequestDto){
+  return request({
+    url: API_BASE_URL + "/user/signup",
+    method: 'POST',
+    body: JSON.stringify(signUpRequestDto)
+  });
 }
