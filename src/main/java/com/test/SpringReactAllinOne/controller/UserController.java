@@ -46,7 +46,7 @@ public class UserController {
                     )
             );
             //authenticate메서드는
-            log.error("what is in authentication ? : " + authentication);
+            log.info("what is in authentication ? : " + authentication);
         } catch (Exception e){
             log.error("exception from controller - {}", e);
         }
