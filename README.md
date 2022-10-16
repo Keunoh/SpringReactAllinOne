@@ -43,3 +43,60 @@ SecurityConfig, UserController,
 AuthenticationManager(스프링 자체),   
 UsernamePasswordAuthenticationToken(스프링 자체)  
 CustomUserDetails, CustomUserDetails, TokenPorvider
+
+-----------------------------------------------------------
+
+* HTTP RESPONSE ERROR CODE
+1. 400 Bad Request
+   : the server cannot or will not procees the request due to
+   something that is perceived to be a client error syntax,
+   invalid request message framing, or deceptive request routing.
+
+   percieve : come to realize or understand :: 자각하다
+   deceptive : making you believe something that is not true
+   관련 URL : https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+   (mdn web docs는 웹에대한 docu가 있으니 잘 살펴 볼것)
+
+2. 401 Unauthorized
+   : the client request has not been completed because it lacks
+   valid authentication credentials for the requested resource.
+
+   lack : the state of being without or not having enough of something
+   :: 부족하다
+
+3. 403 Forbidden
+   : the server understands the request but refuses to authorize it.
+   This status is similar to 401, but for the 403 Forbidden status code
+   reauthenticating makes no difference.
+   The access is permanently forbidden and tied to the application logic,
+   such as insufficient rights to a resource.
+
+   make no difference : have no effect on a person or situation
+   :: 차이가 없다
+   insufficient : not enought :: 불충분한
+
+4. 404 Not Found
+   : the server cannot find the requested resource.
+   A 404 status code only indicates that the resource is missing: not whether
+   the absence is temporary or permanent.
+   If a resource is permanently removed, use the 410 (Gone) status instead.
+
+   absence : the state of being away from a place or person :: 부재
+
+5. 405 Method Not Allowed
+   : the server knows the request method, but the target resource
+   doesn't support this method.
+   The server must generate an [Allow] header field in a 405 status code
+   response.
+   The field must contain a list of methods that the target resource
+   currently supports.
+
+6. 406 Not Acceptable
+   : the server cannot produce a response matching the list of
+   acceptable values defined in the request's proactive content
+   negotiation headers, and that the server is unwilling to supply
+   a default respresentation.
+
+   proactive : creating or controlling a situation by causing something
+   to happen rather than responding to it after it has happened.
+   :: 사전 예방적인
