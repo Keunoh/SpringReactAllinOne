@@ -1,10 +1,7 @@
 package com.test.SpringReactAllinOne.controller;
 
 import com.test.SpringReactAllinOne.domain.User;
-import com.test.SpringReactAllinOne.dto.JwtAuthenticationResponse;
-import com.test.SpringReactAllinOne.dto.LoginRequestDto;
-import com.test.SpringReactAllinOne.dto.LoginResponseDto;
-import com.test.SpringReactAllinOne.dto.SignUpRequestDto;
+import com.test.SpringReactAllinOne.dto.*;
 import com.test.SpringReactAllinOne.repository.UserRepository;
 import com.test.SpringReactAllinOne.rvo.RVO;
 import com.test.SpringReactAllinOne.security.JwtTokenProvider;
@@ -65,7 +62,7 @@ public class UserController {
 
         userService.simpleCreateUser(user);
 
-        return ResponseEntity.ok("create success!");
+        return ResponseEntity.ok(new SignUpResponseDto(user));
 
     }
 }
