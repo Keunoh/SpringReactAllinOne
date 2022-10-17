@@ -63,8 +63,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/api/v1/user/**")
                 .permitAll()
+                .antMatchers("/custom/error/**")
+                .permitAll()
+                //error controller위해 잠시 추가
+                .antMatchers("/**/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
+
 
         /**
          * 내가 만든 jwt필터를 spring security주기에 설정
