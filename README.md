@@ -100,3 +100,15 @@ CustomUserDetails, CustomUserDetails, TokenPorvider
    proactive : creating or controlling a situation by causing something
    to happen rather than responding to it after it has happened.
    :: 사전 예방적인
+
+7. 500 Internal Server Error
+   : the server ecountered an unexpected condition that prevented it
+   from fulfilling the request.
+   This error response is a generic "catch-all" response. Usually, this
+   indicates the server cannot find a better 5xx errror code to response.
+   Sometimes, server administators log error responses like the 500
+   status code with more details about the request to prevent the error
+   from happening again in the future.
+
+   fulfilling : making someone satisfied or happy because of fully
+   developing their character or abillities :: 충족
