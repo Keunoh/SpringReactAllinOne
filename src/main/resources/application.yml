@@ -11,6 +11,9 @@ spring:
   thymeleaf:
     prefix: file:///C:///personal-project//SpringReactAllinOne//target//classes//static/
 
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+
   output:
     ansi:
       enabled: always
@@ -30,9 +33,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
-
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
 
 app:
   jwtSecret: JWTSuperSecretKey
