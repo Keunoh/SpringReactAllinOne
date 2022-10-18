@@ -42,20 +42,20 @@ SecurityContextHolder.getContext().setAuthentication(나의 authentication);
 SecurityConfig, UserController,   
 AuthenticationManager(스프링 자체),   
 UsernamePasswordAuthenticationToken(스프링 자체)  
-CustomUserDetails, CustomUserDetails, TokenPorvider
+CustomUserDetails, CustomUserDetails, TokenProvider
 
 -----------------------------------------------------------
 
 * HTTP RESPONSE ERROR CODE
 1. 400 Bad Request
-   : the server cannot or will not procees the request due to
+   : the server cannot or will not process the request due to
    something that is perceived to be a client error syntax,
    invalid request message framing, or deceptive request routing.
 
-   percieve : come to realize or understand :: 자각하다
+   perceive : come to realize or understand :: 자각하다
    deceptive : making you believe something that is not true
    관련 URL : https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
-   (mdn web docs는 웹에대한 docu가 있으니 잘 살펴 볼것)
+   (mdn web docs는 웹에대한 docs가 있으니 잘 살펴 볼것)
 
 2. 401 Unauthorized
    : the client request has not been completed because it lacks
@@ -73,7 +73,7 @@ CustomUserDetails, CustomUserDetails, TokenPorvider
 
    make no difference : have no effect on a person or situation
    :: 차이가 없다
-   insufficient : not enought :: 불충분한
+   insufficient : not enough :: 불충분한
 
 4. 404 Not Found
    : the server cannot find the requested resource.
@@ -95,20 +95,20 @@ CustomUserDetails, CustomUserDetails, TokenPorvider
    : the server cannot produce a response matching the list of
    acceptable values defined in the request's proactive content
    negotiation headers, and that the server is unwilling to supply
-   a default respresentation.
+   a default representation.
 
    proactive : creating or controlling a situation by causing something
    to happen rather than responding to it after it has happened.
    :: 사전 예방적인
 
 7. 500 Internal Server Error
-   : the server ecountered an unexpected condition that prevented it
+   : the server encountered an unexpected condition that prevented it
    from fulfilling the request.
    This error response is a generic "catch-all" response. Usually, this
-   indicates the server cannot find a better 5xx errror code to response.
-   Sometimes, server administators log error responses like the 500
+   indicates the server cannot find a better 5xx error code to response.
+   Sometimes, server administrators log error responses like the 500
    status code with more details about the request to prevent the error
    from happening again in the future.
 
    fulfilling : making someone satisfied or happy because of fully
-   developing their character or abillities :: 충족
+   developing their character or abilities :: 충족
